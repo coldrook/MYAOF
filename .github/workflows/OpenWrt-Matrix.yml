@@ -49,7 +49,7 @@ jobs:
             {"name": "R2S", "script_dir": "R2S", "arch": "rockchip/armv8", "arch_suffix": "3328"},
             {"name": "R3S", "script_dir": "R4S", "arch": "rockchip/armv8", "arch_suffix": "3566"},
             {"name": "R4S", "script_dir": "R4S", "arch": "rockchip/armv8", "arch_suffix": "3399"},
-            {"name": "R76S", "script_dir": "R4S", "arch": "rockchip/armv8", "arch_suffix": "3576"},
+            {"name": "R76S", "script_dir": "R76S", "arch": "rockchip/armv8", "arch_suffix": "3576"},
             {"name": "X86", "script_dir": "X86", "arch": "x86/64", "arch_suffix": ""}
           ]'
 
