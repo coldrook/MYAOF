@@ -108,9 +108,13 @@ patch -p1 <../../../PATCH/pkgs/firewall/luci/0001-luci-app-firewall-add-nft-full
 popd
 
 ### Shortcut-FE 部分 ###
-# Patch Kernel 以支持 Shortcut-FE
-cp -rf ../PATCH/kernel/sfe/* ./target/linux/generic/hack-${KERNEL_VERSION}/
-cp -rf ../lede/target/linux/generic/pending-${KERNEL_VERSION}/613-netfilter_optional_tcp_window_check.patch ./target/linux/generic/pending-${KERNEL_VERSION}/613-netfilter_optional_tcp_window_check.patch
+# Shortcut-FE 的内核补丁目前与 Linux 6.12.94 不兼容：
+# target/linux/generic/hack-6.12/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+# 会在 include/linux/skbuff.h 上 Hunk FAILED，导致 toolchain/kernel-headers 阶段失败。
+# 先不要注入 SFE 内核补丁；保留 LuCI 补丁以满足后续 natflow LuCI 补丁的上下文依赖。
+rm -f ./target/linux/generic/hack-${KERNEL_VERSION}/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+# cp -rf ../PATCH/kernel/sfe/* ./target/linux/generic/hack-${KERNEL_VERSION}/
+# cp -rf ../lede/target/linux/generic/pending-${KERNEL_VERSION}/613-netfilter_optional_tcp_window_check.patch ./target/linux/generic/pending-${KERNEL_VERSION}/613-netfilter_optional_tcp_window_check.patch
 # Patch LuCI 以增添 Shortcut-FE 开关
 pushd feeds/luci
 patch -p1 <../../../PATCH/pkgs/firewall/luci/0002-luci-app-firewall-add-shortcut-fe-option.patch
